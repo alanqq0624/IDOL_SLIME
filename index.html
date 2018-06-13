@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper.js</title>
+    <link rel="stylesheet" href="myStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="event.js" defer async></script>
+    <!-- Load the Paper.js library -->
+    <script type="text/javascript" src="node_modules/paper/dist/paper-full.min.js"></script>
+    <!-- Use CDN, may be useless ?-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js"></script>
+    <!-- Load external PaperScript and associate it with myCanvas -->
+    <script type="text/paperscript" src="myScript.js" canvas="myCanvas"></script>
+</head>
+
+<body>
+    <div>jizz
+        <button id="download">download</button>
+    </div>
+    <canvas id="myCanvas" resize="true"></canvas>
+</body>
+
+</html>
