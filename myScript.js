@@ -1,8 +1,10 @@
+var slime; // slime like daggable thing
+
 var values = {
     minPoints: 3,
     maxPoints: 3,
-    minRadius: 120,
-    maxRadius: 300
+    minRadius: Math.min(view.size.height, view.size.width) / 2 - 50,
+    maxRadius: Math.min(view.size.height, view.size.width) / 2 - 50
 };
 
 var hitOptions = {
@@ -12,9 +14,16 @@ var hitOptions = {
     tolerance: 5
 };
 
-createPaths();
+createPaths(slime);
 
-function createPaths() {
+function recreatePaths() {
+    slime.remove();
+    createPaths(slime);
+}
+
+function createPaths(path) {
+    console.log("view size: \n" + view.size);
+
     var radiusDelta = values.maxRadius - values.minRadius;
     var pointsDelta = values.maxPoints - values.minPoints;
     var radius = values.minRadius + Math.random() * radiusDelta;
@@ -22,7 +31,7 @@ function createPaths() {
     //view.size: Read only, The size of the visible area in project coordinates.
     //Point.random(): Static function, Returns a point object with random x and y values between 0 and 1.
     //var path = createBlob(view.size * Point.random(), radius, points);
-    var path = createBlob(view.center, radius, points);
+    path = createBlob(view.center, radius, points);
     var lightness = (Math.random() - 0.5) * 0.4 + 0.4;
     var hue = Math.random() * 360;
     path.fillColor = {
@@ -33,7 +42,7 @@ function createPaths() {
     path.strokeColor = {
         hue: hue,
         saturation: 1,
-        lightness: lightness-0.1
+        lightness: lightness - 0.1
     };
     path.strokeWidth = 10;
 }

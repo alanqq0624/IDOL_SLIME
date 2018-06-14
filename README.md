@@ -30,6 +30,10 @@ An easy http server package
 
 [Translate](https://blog.csdn.net/qq_30100043/article/details/73105362)
 
-1. Paper.js
+2. Paper.js
 
 [reference example](http://paperjs.org/examples/hit-testing/)
+
+3. Tiny Colorpicker
+
+[Home website](http://baijs.com/tinycolorpicker/)
