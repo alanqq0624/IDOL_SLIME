@@ -5,15 +5,20 @@ $(document).ready(function () {
     $box.tinycolorpicker();
     var box = $box.data("plugin_tinycolorpicker");
 
-    $box.bind("change", function () {
-        console.log("Color change to "+box.colorHex);
+    $box.change(function () {
+        console.log("Color change to " + box.colorHex);
     });
 
     $("#download").click(function (e) {
-        console.log("clicked!");
+        console.log("download clicked!");
         e.preventDefault(); //取消reload
         var canvas = document.getElementById("myCanvas");
         var dataUrl = canvas.toDataURL();
         console.log(dataUrl);
+    });
+    $("#regenerate").click(function (e) {
+        console.log("regenerate click");
+        e.preventDefault(); //取消reload
+        recreatePaths();
     });
 })
