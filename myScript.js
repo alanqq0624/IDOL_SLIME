@@ -14,14 +14,12 @@ var hitOptions = {
     tolerance: 5
 };
 
-createPaths(slime);
-
 function recreatePaths() {
     slime.remove();
-    createPaths(slime);
+    slime = createPaths();
 }
 
-function createPaths(path) {
+function createPaths() {
     console.log("view size: \n" + view.size);
 
     var radiusDelta = values.maxRadius - values.minRadius;
@@ -32,6 +30,8 @@ function createPaths(path) {
     //Point.random(): Static function, Returns a point object with random x and y values between 0 and 1.
     //var path = createBlob(view.size * Point.random(), radius, points);
     path = createBlob(view.center, radius, points);
+
+    //random a color
     var lightness = (Math.random() - 0.5) * 0.4 + 0.4;
     var hue = Math.random() * 360;
     path.fillColor = {
@@ -42,18 +42,22 @@ function createPaths(path) {
     path.strokeColor = {
         hue: hue,
         saturation: 1,
-        lightness: lightness - 0.1
+        lightness: lightness - 0.18
     };
     path.strokeWidth = 10;
+
+    return path
 }
 
 function createBlob(center, maxRadius, points) {
     var path = new Path();
     path.closed = true;
+    path.selected = true;
     for (var i = 0; i < points; i++) {
         var delta = new Point({
             length: (maxRadius * 0.5) + (Math.random() * maxRadius * 0.5),
-            angle: (360 / points) * i
+            angle: (360 / points) * i,
+            selected: true
         });
         path.add(center + delta);
     }
@@ -107,6 +111,8 @@ function onMouseDrag(event) {
     }
 }
 
+
+
 //for resize
 /*
 // Create a circle shaped path with its center at the center
@@ -116,9 +122,39 @@ var path = new Path.Circle({
     radius: 30,
     strokeColor: 'black'
 });
-
+*/
 function onResize(event) {
     // Whenever the window is resized, recenter the path:
     path.position = view.center;
 }
-*/
+
+
+//JQuery event
+$(document).ready(function () {
+    console.log("load file myScript.js success");
+
+    //create slime
+    slime = createPaths();
+
+    var $box = $('#colorPicker');
+    $box.tinycolorpicker();
+    var box = $box.data("plugin_tinycolorpicker");
+
+    $box.change(function () {
+        console.log("Color change to " + box.colorHex);
+        slime.fillColor = box.colorHex;
+        slime.strokeColor = box.colorHex;
+        slime.strokeColor.lightness -= 0.18
+    });
+
+    $("#download").click(function (e) {
+        console.log("download clicked!");
+        var canvas = document.getElementById("myCanvas");
+        var dataUrl = canvas.toDataURL();
+        console.log(dataUrl);
+    });
+    $("#regenerate").click(function (e) {
+        console.log("regenerate click");
+        recreatePaths();
+    });
+})
