@@ -1,0 +1,24 @@
+{
+  "name": "idol_slime",
+  "version": "1.0.0",
+  "description": "1. install package",
+  "main": "event.js",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "paper": "^0.11.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanqq0624/IDOL_SLIME.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alanqq0624/IDOL_SLIME/issues"
+  },
+  "homepage": "https://github.com/alanqq0624/IDOL_SLIME#readme"
+}
