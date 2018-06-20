@@ -9,8 +9,11 @@
 1. launch server
 
         $ http-server
+if can't use this command, run the command below and rerun it
 
-1. open website
+        $ npm install http-server -g
+
+3. open website
 
 open localhost website in browser, default port is 8080
 
