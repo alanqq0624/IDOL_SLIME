@@ -1,15 +1,15 @@
 body{
     margin: 0px;
     height: 100vh;
-    overflow:hidden;
+    padding: 10px;
+    /* overflow:hidden; */
 }
 #gridContainer{
     height: 100%;
-    margin: 10px;
     /*grid*/
 	display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 5% 15% 65% 15%;
+    grid-template-rows: 5% 15% auto 15%;
     grid-template-areas : 
         "header header header"
         "toper toper toper" 
@@ -25,7 +25,6 @@ header{
 #toper{
     grid-area: toper;
     background-color: #ccffcc;
-    border: 5px solid #ccffcc;
     border-radius: 12px;
 }
 #myCanvas{
@@ -39,8 +38,8 @@ header{
 }
 footer{
     grid-area: footer;
+    height: 100%;
     background-color: #99ccff;
-    border: 5px solid #99ccff;
     border-radius: 12px;
 }
 
