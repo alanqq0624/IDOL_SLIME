@@ -108,6 +108,7 @@ function onMouseDrag(event) {
         path.smooth();
     } else if (path) {
         path.position += event.delta;
+        slime.selected = true;
     }
 }
 
@@ -123,10 +124,10 @@ var path = new Path.Circle({
     strokeColor: 'black'
 });
 */
-function onResize(event) {
-    // Whenever the window is resized, recenter the path:
-    path.position = view.center;
-}
+// function onResize(event) {
+//     // Whenever the window is resized, recenter the path:
+//     path.position = view.center;
+// }
 
 
 //JQuery event
@@ -145,16 +146,17 @@ $(document).ready(function () {
         slime.fillColor = box.colorHex;
         slime.strokeColor = box.colorHex;
         slime.strokeColor.lightness -= 0.18
+        slime.selected = true;
     });
 
-    $("#download").click(function (e) {
-        console.log("download clicked!");
+    $("#submit").click(function (e) {
+        console.log("submit clicked!");
         var canvas = document.getElementById("myCanvas");
         var dataUrl = canvas.toDataURL();
         console.log(dataUrl);
     });
-    $("#regenerate").click(function (e) {
-        console.log("regenerate click");
+    $("#reset").click(function (e) {
+        console.log("reset click");
         recreatePaths();
     });
 })

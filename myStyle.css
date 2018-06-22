@@ -1,20 +1,56 @@
 body{
     margin: 0px;
     height: 100vh;
+    overflow:hidden;
+}
+#gridContainer{
+    height: 100%;
+    margin: 10px;
+    /*grid*/
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 5% 15% 65% 15%;
+    grid-template-areas : 
+        "header header header"
+        "toper toper toper" 
+        "canvas canvas canvas"
+        "footer footer footer";
+    grid-gap: 10px 10px;
+}
+header{
+    grid-area: header;
+    /*add border to visual the border, may delete at the end*/
+    border: 1px solid black;
+}
+#toper{
+    grid-area: toper;
+    background-color: #ccffcc;
+    border: 5px solid #ccffcc;
+    border-radius: 12px;
 }
 #myCanvas{
     width: 100%;
-    height: 80%;
+    height: 100%;
+    grid-area: canvas;
+    border-radius: 12px;
+    /*add border to visual the border, may delete at the end*/
+    border: 1px solid black;
+    border-radius: 12px;
+}
+footer{
+    grid-area: footer;
+    background-color: #99ccff;
+    border: 5px solid #99ccff;
+    border-radius: 12px;
 }
 
-/* COLORPICKER*/
+/*COLORPICKER*************************************************************************************************/
 #colorPicker {
     width: 30px;
     height: 30px;
     position: relative;
     clear: both;
     display: inline-block;
-    margin: 75px;
 }
 #colorPicker .track {
     background: #EFEFEF url(text-color.png) no-repeat 50% 50%;
@@ -68,3 +104,4 @@ body{
     height: 25px;
     cursor: pointer;
 }
+/***************************************************************************************************************/

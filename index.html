@@ -4,35 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paper.js</title>
+    <title>IDOL_SLIME</title>
     <link rel="stylesheet" href="myStyle.css">
     <!-- Load the JQuery library -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- Load the Paper.js library -->
     <script type="text/javascript" src="node_modules/paper/dist/paper-full.min.js"></script>
-    <!-- Use CDN, may be useless ?-->
+    <!-- Use CDN to load Paper.js, may be useless ? -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js"></script>
+    <!-- Load colorpicker library -->
     <script src="jquery.tinycolorpicker.js"></script>
+    <!-- Load the icon library -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG"
+        crossorigin="anonymous">
     <!-- Load external PaperScript and associate it with myCanvas -->
     <script type="text/paperscript" src="myScript.js" canvas="myCanvas" defer></script>
 </head>
 
 <body>
-    <div>jizz
-        <button id="download">download</button>
-        <button id="regenerate">regenerate</button>
-        <div id="colorPicker">
-            <a class="color">
-                <div class="colorInner"></div>
-            </a>
-            <div class="track"></div>
-            <ul class="dropdown">
-                <li></li>
-            </ul>
-            <input type="hidden" class="colorInput" />
+    <div id="gridContainer">
+        <header>
+            <i class="fas fa-arrow-left"></i>
+        </header>
+        <div id="toper">
+            jizz
         </div>
+        <canvas id="myCanvas" resize></canvas>
+        <footer>
+            <i id="reset" class="fas fa-undo"></i>
+            <div id="colorPicker">
+                <a class="color">
+                    <div class="colorInner"></div>
+                </a>
+                <div class="track"></div>
+                <ul class="dropdown">
+                    <li></li>
+                </ul>
+                <input type="hidden" class="colorInput" />
+            </div>
+            <i id="submit" class="fas fa-check"></i>
+        </footer>
     </div>
-    <canvas id="myCanvas" resize="true"></canvas>
 </body>
 
 </html>
