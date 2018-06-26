@@ -10,7 +10,7 @@ body{
     /*grid*/
 	display: grid;
     grid-template-columns: 10% 1fr 1fr 1fr 10%;/*width*/
-    grid-template-rows: 1% 9% 15% auto 15%;/*heigh*/
+    grid-template-rows: 1% 9% 15% auto 25%;/*heigh*/
     grid-template-areas : 
         ". . . . ."
         ". header1 header2 header3 ."
@@ -20,17 +20,53 @@ body{
 }
 #prev{
     grid-area: header1;
+    background-image: url('./image/kekeke-10.png');
+	background-size: 20% auto;
+	background-position: left center;
+	background-repeat: no-repeat;
 }
 #username{
     grid-area: header2;
-    text-decoration: underline;
+    text-align: center;
+	line-height: 9vh;
+	font-family: source-han-sans-traditional, sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	text-decoration: underline;
 }
 #setting{
     grid-area: header3;
+    background-image: url('../image/kekeke-08.png');
+	background-size: 20% auto;
+	background-position: right center;
+	background-repeat: no-repeat;
 }
 #title{
     grid-area: title;
-    background-color: #ccffcc;
+    background-color: #E0A094;
+    text-align: left;
+    position:relative;
+}
+#shot{
+    background-image: url('./image/kekeke-21.png');
+	background-size: contain;
+	background-position: left center;
+	background-repeat: no-repeat;
+	position: absolute;
+	height: 30%;
+	width: 30%;
+	top: 30%;
+	left: 5%;
+	z-index: 10;
+}
+#edit{
+    font-family: "Andale Mono";
+	font-size: 10px;
+	color: white;
+	position: absolute;
+	bottom: 0%;
+	left: 5%;
 }
 #myCanvas{
     width: 100%;
@@ -39,12 +75,20 @@ body{
 }
 #reset{
     grid-area: tool1;
+    background-image: url('./image/kekeke-30.png');
+    background-size: 20% auto;
+	background-position: left center;
+	background-repeat: no-repeat;
 }
-#colorPicker{
+#cpContainer{
     grid-area: tool2;
 }
 #submit{
     grid-area: tool3;
+    background-image: url("./image/kekeke-29.png");
+    background-size: 20% auto;
+	background-position: right center;
+	background-repeat: no-repeat;
 }
 
 /*COLORPICKER*************************************************************************************************/
@@ -52,8 +96,11 @@ body{
     width: 30px;
     height: 30px;
     position: relative;
+    left: 50%;
+    top: 50%;
     clear: both;
     display: inline-block;
+    transform: translateX(-15px) translateY(-15px);
 }
 #colorPicker .track {
     background: #EFEFEF url(text-color.png) no-repeat 50% 50%;
