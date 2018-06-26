@@ -1,7 +1,8 @@
 body{
     margin: 0px;
     height: 100vh;
-    padding: 10px;
+    width: 100vw;
+    padding: 0px;
     /* overflow:hidden; */
 }
 #gridContainer{
@@ -19,21 +20,19 @@ body{
 }
 header{
     grid-area: header;
-    /*add border to visual the border, may delete at the end*/
-    border: 1px solid black;
+    margin: 10px 10px 0px 10px;
 }
 #toper{
     grid-area: toper;
     background-color: #ccffcc;
     border-radius: 12px;
+    margin: 0px 10px 0px 10px;
 }
 #myCanvas{
     width: 100%;
     height: 100%;
     grid-area: canvas;
     border-radius: 12px;
-    /*add border to visual the border, may delete at the end*/
-    border: 1px solid black;
     border-radius: 12px;
 }
 footer{
@@ -41,6 +40,7 @@ footer{
     height: 100%;
     background-color: #99ccff;
     border-radius: 12px;
+    margin: 0px 10px 0px 10px;
 }
 
 /*COLORPICKER*************************************************************************************************/
