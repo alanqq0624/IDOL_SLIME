@@ -5,6 +5,7 @@ const app = express();
 const port_express = 10080;
 //let express can use .body. to get data for method'post'
 var bodyParser = require('body-parser');
+app.use(bodyParser({limit: '50mb'}));
 app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     extended: true

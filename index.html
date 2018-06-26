@@ -14,38 +14,32 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js"></script>
     <!-- Load colorpicker library -->
     <script src="jquery.tinycolorpicker.js"></script>
-    <!-- Load the icon library -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css" integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG"
-        crossorigin="anonymous">
     <!-- Load external PaperScript and associate it with myCanvas -->
     <script type="text/paperscript" src="myScript.js" canvas="myCanvas" defer></script>
 </head>
 
 <body>
     <div id="gridContainer">
-        <header>
-            <i class="fas fa-arrow-left"></i>
-        </header>
-        <div id="toper">
-            jizz
+        <img id="prev" src="./image/kekeke-10.png" alt="Previous">
+        <div id="username">username</div>
+        <img id="setting" src="./image/kekeke-08.png" alt="Setting">
+        <div id="title">
+            <img src="./image/kekeke-21.png" alt="head">
+            <p>EDIT PERSONAL IMAGE</p>
         </div>
         <canvas id="myCanvas" resize></canvas>
-        <footer>
-            <i id="reset" class="fas fa-undo"></i>
-            <div id="colorPicker">
-                <a class="color">
-                    <div class="colorInner"></div>
-                </a>
-                <div class="track"></div>
-                <ul class="dropdown">
-                    <li></li>
-                </ul>
-                <input type="hidden" class="colorInput" />
-            </div>
-            <i id="submit" class="fas fa-check"></i>
-        </footer>
+        <img id="reset" src="./image/kekeke-30.png" alt="Reset">
+        <div id="colorPicker">
+            <a class="color">
+                <div class="colorInner"></div>
+            </a>
+            <div class="track"></div>
+            <ul class="dropdown">
+                <li></li>
+            </ul>
+            <input type="hidden" class="colorInput" />
+        </div>
+        <img id="submit" src="./image/kekeke-29.png" alt="Submit">
     </div>
 </body>
 

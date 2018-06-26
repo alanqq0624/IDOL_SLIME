@@ -1,35 +1,55 @@
-var slime; // slime like daggable thing
+// slime like daggable thing
+var slime, eye1, eye2;
 
 var values = {
-    minPoints: 6,
-    maxPoints: 6,
-    minRadius: Math.min(view.size.height, view.size.width) / 2 - 50,
-    maxRadius: Math.min(view.size.height, view.size.width) / 2 - 50
+    points: 5,
+    Radius: Math.min(view.size.height, view.size.width) / 2
 };
 
 var hitOptions = {
     segments: true,
     stroke: true,
     fill: true,
-    tolerance: 5
 };
+
+var initP = [{
+    length: 0.7,
+    angle: 30,
+}, {
+    length: 0.6,
+    angle: 140,
+}, {
+    length: 0.5,
+    angle: 179,
+}, {
+    length: 0.5,
+    angle: 235,
+}, {
+    length: 0.6,
+    angle: 335,
+}]
 
 function recreatePaths() {
     slime.remove();
+    eye1.remove();
+    eye2.remove();
     slime = createPaths();
+    eye1 = createEye(1);
+    eye2 = createEye(2);
+    eye1.insertAbove(slime);
+    eye2.insertAbove(slime);
 }
 
 function createPaths() {
-    console.log("view size: \n" + view.size);
+    console.log("view size: " + view.size);
+    console.log("view center: " + view.center);
 
-    var radiusDelta = values.maxRadius - values.minRadius;
-    var pointsDelta = values.maxPoints - values.minPoints;
-    var radius = values.minRadius + Math.random() * radiusDelta;
-    var points = values.minPoints + Math.floor(Math.random() * pointsDelta);
+    var radius = values.Radius;
+    var points = values.points;
     //view.size: Read only, The size of the visible area in project coordinates.
     //Point.random(): Static function, Returns a point object with random x and y values between 0 and 1.
     //var path = createBlob(view.size * Point.random(), radius, points);
-    path = createBlob(view.center, radius, points);
+    var path = createBlob(view.center, radius, points);
 
     //random a color
     var lightness = (Math.random() - 0.5) * 0.4 + 0.4;
@@ -44,7 +64,7 @@ function createPaths() {
         saturation: 1,
         lightness: lightness - 0.18
     };
-    path.strokeWidth = 10;
+    path.strokeWidth = 5;
 
     return path
 }
@@ -55,8 +75,8 @@ function createBlob(center, maxRadius, points) {
     path.selected = true;
     for (var i = 0; i < points; i++) {
         var delta = new Point({
-            length: (maxRadius * 0.5) + (Math.random() * maxRadius * 0.5),
-            angle: (360 / points) * i,
+            length: maxRadius * initP[i].length,
+            angle: initP[i].angle,
             selected: true
         });
         path.add(center + delta);
@@ -65,16 +85,57 @@ function createBlob(center, maxRadius, points) {
     return path;
 }
 
+//give position(1 or 2) to determine left(1) or right(2) eye
+function createEye(position) {
+    if (position == 1) {
+        position = new Point(view.center + {
+            length: values.Radius * 0.3,
+            angle: 212,
+            selected: false
+        });
+    } else if (position == 2) {
+        position = new Point(view.center + {
+            length: values.Radius * 0.4,
+            angle: 0,
+            selected: false
+        });
+    } else {
+        position = view.center
+    }
+    var path = new Path();
+    path.closed = true;
+    path.selected = false;
+    for (var i = 0; i < 6; i++) {
+        var delta = new Point({
+            length: 6,
+            angle: (360 / 6) * i,
+            selected: false
+        });
+        path.add(position + delta);
+    }
+    path.smooth();
+
+    path.fillColor = 'white';
+    path.strokeColor = {
+        hue: 0,
+        saturation: 0,
+        lightness: 0.82
+    };
+    path.strokeWidth = 1;
+    return path;
+}
+
 // indicate the current select element(like segment ...)
 var segment, path;
-var movePath = false;
 
 function onMouseDown(event) {
     segment = path = null;
     var hitResult = project.hitTest(event.point, hitOptions);
-    if (!hitResult){
+    if (!hitResult) {
         //let all element be not selected
-        slime.selected = false
+        slime.selected = false;
+        eye1.selected = false;
+        eye2.selected = false;
         return;
     }
 
@@ -97,9 +158,6 @@ function onMouseDown(event) {
             path.smooth();
         }
     }
-    movePath = hitResult.type == 'fill';
-    if (movePath)
-        project.activeLayer.addChild(hitResult.item);
 }
 
 function onMouseMove(event) {
@@ -141,8 +199,12 @@ var path = new Path.Circle({
 $(document).ready(function () {
     console.log("load file myScript.js success");
 
-    //create slime
+    //create slime and eyes
     slime = createPaths();
+    eye1 = createEye(1);
+    eye2 = createEye(2);
+    eye1.insertAbove(slime);
+    eye2.insertAbove(slime);
 
     var $box = $('#colorPicker');
     $box.tinycolorpicker();
@@ -154,10 +216,20 @@ $(document).ready(function () {
         slime.strokeColor = box.colorHex;
         slime.strokeColor.lightness -= 0.18
         slime.selected = true;
+        eye1.insertAbove(slime);
+        eye2.insertAbove(slime);
+
+        slime.selected = false; 
+        eye1.selected = false;
+        eye2.selected = false;
     });
 
     $("#submit").click(function (e) {
-        slime.selected = false;//let selected segment can't sein image
+        //let selected segment can't see in image, but fail
+        slime.selected = false; 
+        eye1.selected = false;
+        eye2.selected = false;
+
         e.preventDefault(); //取消reload
         console.log("submit clicked!");
         var canvas = document.getElementById("myCanvas");
@@ -181,5 +253,8 @@ $(document).ready(function () {
     $("#reset").click(function (e) {
         console.log("reset click");
         recreatePaths();
+        slime.selected = false; 
+        eye1.selected = false;
+        eye2.selected = false;
     });
 })
