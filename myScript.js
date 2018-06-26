@@ -1,8 +1,8 @@
 var slime; // slime like daggable thing
 
 var values = {
-    minPoints: 3,
-    maxPoints: 3,
+    minPoints: 6,
+    maxPoints: 6,
     minRadius: Math.min(view.size.height, view.size.width) / 2 - 50,
     maxRadius: Math.min(view.size.height, view.size.width) / 2 - 50
 };
@@ -65,14 +65,18 @@ function createBlob(center, maxRadius, points) {
     return path;
 }
 
+// indicate the current select element(like segment ...)
 var segment, path;
 var movePath = false;
 
 function onMouseDown(event) {
     segment = path = null;
     var hitResult = project.hitTest(event.point, hitOptions);
-    if (!hitResult)
+    if (!hitResult){
+        //let all element be not selected
+        slime.selected = false
         return;
+    }
 
     if (event.modifiers.shift) {
         if (hitResult.type == 'segment') {
@@ -83,9 +87,11 @@ function onMouseDown(event) {
 
     if (hitResult) {
         path = hitResult.item;
+        path.selected = true
         if (hitResult.type == 'segment') {
             segment = hitResult.segment;
         } else if (hitResult.type == 'stroke') {
+            slime.selected = true;
             var location = hitResult.location;
             segment = path.insert(location.index + 1, event.point);
             path.smooth();
@@ -104,11 +110,12 @@ function onMouseMove(event) {
 
 function onMouseDrag(event) {
     if (segment) {
+        path.selected = true;
         segment.point += event.delta;
         path.smooth();
     } else if (path) {
+        path.selected = true;
         path.position += event.delta;
-        slime.selected = true;
     }
 }
 
@@ -150,6 +157,7 @@ $(document).ready(function () {
     });
 
     $("#submit").click(function (e) {
+        slime.selected = false;//let selected segment can't sein image
         e.preventDefault(); //取消reload
         console.log("submit clicked!");
         var canvas = document.getElementById("myCanvas");
