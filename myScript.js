@@ -150,10 +150,25 @@ $(document).ready(function () {
     });
 
     $("#submit").click(function (e) {
+        e.preventDefault(); //取消reload
         console.log("submit clicked!");
         var canvas = document.getElementById("myCanvas");
-        var dataUrl = canvas.toDataURL();
-        console.log(dataUrl);
+        var headImage = canvas.toDataURL();
+        console.log(headImage);
+        $.ajax({
+                url: "./headImage",//put url hear , change hear!!!!!!!!!!!!
+                method: "POST",
+                data: {
+                    headImage: dataUrl,
+                },
+                success: function (receive) {
+                    console.log("send image success");
+                },
+                error: function (code) {
+                    console.log("send Image fail");
+                    console.log(code);
+                }
+            })
     });
     $("#reset").click(function (e) {
         console.log("reset click");
